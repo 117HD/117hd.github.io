@@ -75,6 +75,6 @@ export class PolyArea {
     }
     
     getName() {
-        return "Area";
+        return "AABB";
     }
 };

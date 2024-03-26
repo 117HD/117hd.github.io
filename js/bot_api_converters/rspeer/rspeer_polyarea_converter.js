@@ -8,7 +8,7 @@ export class RSPeerPolyAreaConverter extends OSBotPolyAreaConverter {
 
     constructor() {
         super();
-        this.javaArea = "Area";
+        this.javaArea = "AABB";
         this.javaPosition = "Position";
     }
     
@@ -57,7 +57,7 @@ export class RSPeerPolyAreaConverter extends OSBotPolyAreaConverter {
         if (polyarea.positions.length == 0) {
             return "";
         }
-        var output = `${this.javaArea} area = ${this.javaArea}.polygonal(\n    new ${this.javaPosition}[] {`;
+        var output = ` ${this.javaArea}.polygonal(\n    new ${this.javaPosition}[] {`;
         for (var i = 0; i < polyarea.positions.length; i++) {
             var position = polyarea.positions[i];
             output += `\n        new ${this.javaPosition}(${position.x}, ${position.y}, ${position.z})`;

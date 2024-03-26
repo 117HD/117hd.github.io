@@ -8,7 +8,7 @@ export class DreamBotPathConverter extends OSBotPathConverter {
 
     constructor() {
         super();
-        this.javaArea = "Area";
+        this.javaArea = "AABB";
         this.javaPosition = "Tile";
     }
     

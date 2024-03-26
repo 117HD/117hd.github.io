@@ -37,40 +37,10 @@ import {RuneLiteAreasConverter} from '../bot_api_converters/runelite/runelite_ar
 import {RuneLitePathConverter} from '../bot_api_converters/runelite/runelite_path_converter.js';
 
 var converters = {
-    "OSBot": {
+    "HD": {
         "areas_converter": new OSBotAreasConverter(),
         "path_converter": new OSBotPathConverter(),
         "polyarea_converter": new OSBotPolyAreaConverter()
-    },
-    "TRiBot": {
-        "areas_converter": new TRiBotAreasConverter(),
-        "path_converter": new TRiBotPathConverter(),
-        "polyarea_converter": new TRiBotPolyAreaConverter()
-    },
-    "DreamBot": {
-        "areas_converter": new DreamBotAreasConverter(),
-        "path_converter": new DreamBotPathConverter(),
-        "polyarea_converter": new DreamBotPolyAreaConverter()
-    },
-    "RSPeer": {
-        "areas_converter": new RSPeerAreasConverter(),
-        "path_converter": new RSPeerPathConverter(),
-        "polyarea_converter": new RSPeerPolyAreaConverter()
-    },
-    "QuantumBot": {
-        "areas_converter": new QuantumBotAreasConverter(),
-        "path_converter": new QuantumBotPathConverter(),
-        "polyarea_converter": new QuantumBotPolyAreaConverter()
-    },
-    "RuneMate": {
-        "areas_converter": new RuneMateAreasConverter(),
-        "path_converter": new RuneMatePathConverter(),
-        "polyarea_converter": new RuneMatePolyAreaConverter()
-    },
-    "RuneLite": {
-        "areas_converter": new RuneLiteAreasConverter(),
-        "path_converter": new RuneLitePathConverter(),
-        "polyarea_converter": new RuneLitePathConverter()
     }
 };
 

@@ -40,7 +40,7 @@ export class OSBotPolyAreaConverter extends OSBotConverter {
         if (polyarea.positions.length == 0) {
             return "";
         }
-        var output = `${this.javaArea} area = new ${this.javaArea}(\n    new int[][]{`;
+        var output = `AreaName((\n    new int[][]{`;
         for (var i = 0; i < polyarea.positions.length; i++) {
             output += `\n        { ${polyarea.positions[i].x}, ${polyarea.positions[i].y} }`;
             if (i !== polyarea.positions.length - 1) {

@@ -37,6 +37,6 @@ export class TRiBotAreasConverter extends OSBotAreasConverter {
     }
     
     toJavaSingle(area) {
-        return `new ${this.javaArea}(new ${this.javaPosition}(${area.startPosition.x}, ${area.startPosition.y}, ${area.startPosition.z}), new ${this.javaPosition}(${area.endPosition.x}, ${area.endPosition.y}, ${area.endPosition.z}))`;
+        return `AreaName(new ${this.javaPosition}(${area.startPosition.x}, ${area.startPosition.y}, ${area.startPosition.z}), new ${this.javaPosition}(${area.endPosition.x}, ${area.endPosition.y}, ${area.endPosition.z}))`;
     }
 }
