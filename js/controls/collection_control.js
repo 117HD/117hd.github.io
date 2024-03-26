@@ -76,18 +76,7 @@ export var CollectionControl = L.Control.extend({
         });
 
         // Settings control
-        this._createControl('<i class="fa fa-cog"></i>', container, function(e) {
-            if ($("#settings-panel").is(":visible")) {
-                $("#settings-panel").hide("slide", {direction: "right"}, 300);
-            } else {
-                if (this._currentDrawable !== undefined) {
-                    this._toggleCollectionMode();
-                }
 
-                $("#settings-panel").css('display', 'flex').hide();
-                $("#settings-panel").show("slide", {direction: "right"}, 300);
-            }
-        });
 
         // Area control
         this._createControl('<img src="/css/images/area-icon.png" alt="Area" title="Area" height="30" width="30">', container, function(e) {

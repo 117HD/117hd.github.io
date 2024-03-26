@@ -51,6 +51,14 @@ export class OSBotAreasConverter extends OSBotConverter {
         return output;
     }
     
+    toJavaSingle1(area) {
+        var areaDef = `AABB(${area.startPosition.x}, ${area.startPosition.y}, ${area.endPosition.x}, ${area.endPosition.y})`;
+        if (area.startPosition.z > 0) {
+            areaDef += `.setPlane(${area.startPosition.z})`;
+        }
+        return areaDef;
+    }
+
     toJavaSingle(area) {
         var areaDef = `AreaName(${area.startPosition.x}, ${area.startPosition.y}, ${area.endPosition.x}, ${area.endPosition.y})`;
         if (area.startPosition.z > 0) {
@@ -65,7 +73,7 @@ export class OSBotAreasConverter extends OSBotConverter {
         } else if (areas.areas.length > 1) {
             var output = `AreaName(\n`;
             for (var i = 0; i < areas.areas.length; i++) {
-                output += "    " + this.toJavaSingle(areas.areas[i]);
+                output += "    " + this.toJavaSingle1(areas.areas[i]);
                 if (i !== areas.areas.length - 1) {
                     output += ",";
                 }
