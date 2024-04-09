@@ -53,7 +53,7 @@ $(document).ready(function () {
     map.updateMapPath();
     map.getContainer().focus();
 
-    map.addControl(new TitleLabel());
+
     map.addControl(new CoordinatesControl());
     map.addControl(new RegionBaseCoordinatesControl());
     map.addControl(new LocalCoordinatesControl());
