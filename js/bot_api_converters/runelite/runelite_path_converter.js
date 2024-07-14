@@ -8,7 +8,7 @@ export class RuneLitePathConverter extends DreamBotPathConverter {
 
     constructor() {
         super();
-        this.javaArea = "AABB";
-        this.javaPosition = "AABB";
+        this.javaArea = "WorldArea";
+        this.javaPosition = "WorldPoint";
     }
 }

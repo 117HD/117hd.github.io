@@ -15,7 +15,7 @@ class Locations {
         }
         
         $.ajax({
-            url: "resources/locations.json",
+            url: "https://raw.githubusercontent.com/Mark7625/osrs_map_tiles/master/locations.json",
             dataType: "json",
             context: this,
             success: function( data ) {

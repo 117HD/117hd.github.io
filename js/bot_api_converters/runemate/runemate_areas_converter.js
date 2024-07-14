@@ -9,7 +9,7 @@ export class RuneMateAreasConverter extends OSBotAreasConverter {
     
     constructor() {
         super();
-        this.javaArea = "AABB";
+        this.javaArea = "Area";
         this.javaPosition = "Coordinate";
     }
     
@@ -43,7 +43,7 @@ export class RuneMateAreasConverter extends OSBotAreasConverter {
     }
     
     toJavaSingle(area) {
-        return `AreaName.Rectangular(` +
+        return `new ${this.javaArea}.Rectangular(` +
                `new ${this.javaPosition}(${area.startPosition.x}, ${area.startPosition.y}, ${area.startPosition.z}), ` +
                `new ${this.javaPosition}(${area.endPosition.x}, ${area.endPosition.y}, ${area.endPosition.z})` +
                `)`;

@@ -8,7 +8,7 @@ export class QuantumBotPolyAreaConverter extends OSBotPolyAreaConverter {
 
     constructor() {
         super();
-        this.javaArea = "AABB";
+        this.javaArea = "Area";
         this.javaPosition = "Tile";
     }
     
@@ -39,7 +39,7 @@ export class QuantumBotPolyAreaConverter extends OSBotPolyAreaConverter {
         if (polyarea.positions.length == 0) {
             return "";
         }
-        var output = `AreaName((\n    new int[][]{`;
+        var output = `${this.javaArea} area = new ${this.javaArea}(\n    new int[][]{`;
         for (var i = 0; i < polyarea.positions.length; i++) {
             output += `\n        { ${polyarea.positions[i].x}, ${polyarea.positions[i].y} }`;
             if (i !== polyarea.positions.length - 1) {

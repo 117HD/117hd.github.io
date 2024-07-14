@@ -14,15 +14,28 @@ var RegionLabelsCanvas = CanvasLayer.extend({
 
     onDrawLayer: function (info) {
         var zoom = this._map.getZoom();
-        
-        var fontSize = 0.15 * Math.pow(2, zoom);
-                
+
+        var fontSize = 0.12 * Math.pow(2, zoom);
+
+
         var ctx = info.canvas.getContext('2d');
         ctx.clearRect(0, 0, info.canvas.width, info.canvas.height);
 
         ctx.font = fontSize + 'px Calibri';
         ctx.fillStyle = 'white';
         ctx.textAlign = "center";
+        ctx.strokeStyle = 'black'; // Outline color
+        ctx.lineWidth = 3; // Outline width
+        ctx.textAlign = "center";
+
+        function drawText(text, x, y) {
+            // Draw black outline
+            ctx.strokeText(text, x, y);
+
+            // Draw white text over the black outline
+            ctx.fillText(text, x, y);
+        }
+
 
         for (var x = MIN_X; x < MAX_X; x += REGION_WIDTH) {
             for (var y = MIN_Y; y < MAX_Y; y += REGION_HEIGHT) {
@@ -33,7 +46,7 @@ var RegionLabelsCanvas = CanvasLayer.extend({
 
                 var canvasPoint = info.layer._map.latLngToContainerPoint(latLng);
 
-                ctx.fillText(region.id.toString(), canvasPoint.x, canvasPoint.y);
+                drawText(region.id.toString() + ' (' + region.regionX.toString() + ' , ' + region.regionY.toString() + ')', canvasPoint.x + 10, canvasPoint.y + 10);
             }
         }
     }

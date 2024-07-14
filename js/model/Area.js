@@ -46,6 +46,6 @@ export class Area {
     }
 
     getName() {
-        return "AABB";
+        return "Area";
     }
 }

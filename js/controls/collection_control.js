@@ -36,11 +36,48 @@ import {RuneMatePolyAreaConverter} from '../bot_api_converters/runemate/runemate
 import {RuneLiteAreasConverter} from '../bot_api_converters/runelite/runelite_areas_converter.js';
 import {RuneLitePathConverter} from '../bot_api_converters/runelite/runelite_path_converter.js';
 
+import {HD117AreasConverter} from "../bot_api_converters/117hd/HD117_areas_converter.js";
+
 var converters = {
-    "HD": {
+    "OSBot": {
         "areas_converter": new OSBotAreasConverter(),
         "path_converter": new OSBotPathConverter(),
         "polyarea_converter": new OSBotPolyAreaConverter()
+    },
+    "TRiBot": {
+        "areas_converter": new TRiBotAreasConverter(),
+        "path_converter": new TRiBotPathConverter(),
+        "polyarea_converter": new TRiBotPolyAreaConverter()
+    },
+    "DreamBot": {
+        "areas_converter": new DreamBotAreasConverter(),
+        "path_converter": new DreamBotPathConverter(),
+        "polyarea_converter": new DreamBotPolyAreaConverter()
+    },
+    "RSPeer": {
+        "areas_converter": new RSPeerAreasConverter(),
+        "path_converter": new RSPeerPathConverter(),
+        "polyarea_converter": new RSPeerPolyAreaConverter()
+    },
+    "QuantumBot": {
+        "areas_converter": new QuantumBotAreasConverter(),
+        "path_converter": new QuantumBotPathConverter(),
+        "polyarea_converter": new QuantumBotPolyAreaConverter()
+    },
+    "RuneMate": {
+        "areas_converter": new RuneMateAreasConverter(),
+        "path_converter": new RuneMatePathConverter(),
+        "polyarea_converter": new RuneMatePolyAreaConverter()
+    },
+    "RuneLite": {
+        "areas_converter": new RuneLiteAreasConverter(),
+        "path_converter": new RuneLitePathConverter(),
+        "polyarea_converter": new RuneLitePathConverter()
+    },
+    "117HD": {
+        "areas_converter": new HD117AreasConverter(),
+        "path_converter": new RuneLitePathConverter(),
+        "polyarea_converter": new RuneLitePathConverter()
     }
 };
 
@@ -76,7 +113,18 @@ export var CollectionControl = L.Control.extend({
         });
 
         // Settings control
+        this._createControl('<i class="fa fa-cog"></i>', container, function(e) {
+            if ($("#settings-panel").is(":visible")) {
+                $("#settings-panel").hide("slide", {direction: "right"}, 300);
+            } else {
+                if (this._currentDrawable !== undefined) {
+                    this._toggleCollectionMode();
+                }
 
+                $("#settings-panel").css('display', 'flex').hide();
+                $("#settings-panel").show("slide", {direction: "right"}, 300);
+            }
+        });
 
         // Area control
         this._createControl('<img src="/css/images/area-icon.png" alt="Area" title="Area" height="30" width="30">', container, function(e) {
@@ -253,11 +301,15 @@ export var CollectionControl = L.Control.extend({
 
         $("#code-output").html(output);
     },
-    
+
     _loadFromText: function() {
         if (this._currentDrawable !== undefined) {
             var botAPI = $("#bot-api option:selected").text();
-            converters[botAPI][this._currentConverter].fromJava($("#code-output").text(), this._currentDrawable);
+            // Get plain text without formatting
+            var plainText = $("#code-output").text();
+            // Replace newlines and tabs with spaces to standardize formatting
+            plainText = plainText.replace(/\n/g, ' ').replace(/\t/g, ' ');
+            converters[botAPI][this._currentConverter].fromJava(plainText, this._currentDrawable);
         }
     },
 

@@ -8,7 +8,7 @@ export class RuneMatePolyAreaConverter extends OSBotPolyAreaConverter {
 
     constructor() {
         super();
-        this.javaArea = "AABB";
+        this.javaArea = "Area";
         this.javaPosition = "Coordinate";
     }
     
@@ -32,7 +32,7 @@ export class RuneMatePolyAreaConverter extends OSBotPolyAreaConverter {
         if (polyarea.positions.length == 0) {
             return "";
         }
-        var output = `AreaName(.Polygonal(`;
+        var output = `${this.javaArea} area = new ${this.javaArea}.Polygonal(`;
         for (var i = 0; i < polyarea.positions.length; i++) {
             var position = polyarea.positions[i];
             output += `\n    new ${this.javaPosition}(${position.x}, ${position.y}, ${position.z})`;

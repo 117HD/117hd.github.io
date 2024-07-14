@@ -9,7 +9,7 @@ export class DreamBotAreasConverter extends OSBotAreasConverter {
     
     constructor() {
         super();
-        this.javaArea = "AABB";
+        this.javaArea = "Area";
         this.javaPosition = "Tile";
     }
     
@@ -53,8 +53,8 @@ export class DreamBotAreasConverter extends OSBotAreasConverter {
     
     toJavaSingle(area) {
         if (area.startPosition.z == 0) {
-            return `AreaName(${area.startPosition.x}, ${area.startPosition.y}, ${area.endPosition.x}, ${area.endPosition.y})`;
+            return `new ${this.javaArea}(${area.startPosition.x}, ${area.startPosition.y}, ${area.endPosition.x}, ${area.endPosition.y})`;
         }
-        return `AreaName(${area.startPosition.x}, ${area.startPosition.y}, ${area.endPosition.x}, ${area.endPosition.y}, ${area.endPosition.z})`;
+        return `new ${this.javaArea}(${area.startPosition.x}, ${area.startPosition.y}, ${area.endPosition.x}, ${area.endPosition.y}, ${area.endPosition.z})`;
     }
 }

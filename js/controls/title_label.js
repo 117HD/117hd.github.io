@@ -8,8 +8,8 @@ export var TitleLabel = L.Control.extend({
     onAdd: function (map) {
         var container = L.DomUtil.create('div');
         container.id = 'titleLabel';
-        container.href = 'http://osbot.org/forum/user/192661-explv/';
-        container.innerHTML = "<span id='explv'>Explv</span>'s Map";
+        container.href = 'https://github.com/117HD/RLHD';
+        container.innerHTML = "<span id='explv'>117HD</span>'s Map";
 
         L.DomEvent.disableClickPropagation(container);
         return container;

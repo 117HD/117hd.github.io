@@ -15,6 +15,7 @@ import { RegionLabelsControl } from './controls/region_labels_control.js';
 import { RegionLookupControl } from './controls/region_lookup_control.js';
 import { TitleLabel } from './controls/title_label.js';
 import { Region } from './model/Region.js';
+import {ControlMapType} from "./controls/control_map_type.js";
 
 $(document).ready(function () {
 
@@ -33,13 +34,14 @@ $(document).ready(function () {
         renderer: L.canvas()
     });
 
+    map.mapType = 'normal';
     map.plane = 0;
 
     map.updateMapPath = function () {
         if (map.tile_layer !== undefined) {
             map.removeLayer(map.tile_layer);
         }
-        map.tile_layer = L.tileLayer('https://raw.githubusercontent.com/Mark7625/osrs_map_tiles/master/' + map.plane + '/{z}/{x}/{y}.png', {
+        map.tile_layer = L.tileLayer('https://raw.githubusercontent.com/Mark7625/osrs_map_tiles/master/' + map.mapType + '/' + map.plane + '/{z}/{x}/{y}.png', {
             minZoom: 4,
             maxZoom: 11,
             attribution: 'Map data',
@@ -53,7 +55,8 @@ $(document).ready(function () {
     map.updateMapPath();
     map.getContainer().focus();
 
-
+    map.addControl(new TitleLabel());
+    map.addControl(new ControlMapType());
     map.addControl(new CoordinatesControl());
     map.addControl(new RegionBaseCoordinatesControl());
     map.addControl(new LocalCoordinatesControl());

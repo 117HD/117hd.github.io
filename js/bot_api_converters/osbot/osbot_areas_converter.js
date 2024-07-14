@@ -10,17 +10,7 @@ export class OSBotAreasConverter extends OSBotConverter {
     constructor() {
         super();
     }
-    
-    /*
-    API Doc:
-        https://osbot.org/api/org/osbot/rs07/api/map/Position.html
-        https://osbot.org/api/org/osbot/rs07/api/map/Area.html
-        
-        Area(int x1, int y1, int x2, int y2)
-        Area(Position southWest, Position northEast)
-        
-        Position(int x, int y, int z)
-    */
+
     fromJava(text, areas) {        
         areas.removeAll();
         text = text.replace(/\s/g, '');
@@ -51,16 +41,8 @@ export class OSBotAreasConverter extends OSBotConverter {
         return output;
     }
     
-    toJavaSingle1(area) {
-        var areaDef = `AABB(${area.startPosition.x}, ${area.startPosition.y}, ${area.endPosition.x}, ${area.endPosition.y})`;
-        if (area.startPosition.z > 0) {
-            areaDef += `.setPlane(${area.startPosition.z})`;
-        }
-        return areaDef;
-    }
-
     toJavaSingle(area) {
-        var areaDef = `AreaName(${area.startPosition.x}, ${area.startPosition.y}, ${area.endPosition.x}, ${area.endPosition.y})`;
+        var areaDef = `new ${this.javaArea}(${area.startPosition.x}, ${area.startPosition.y}, ${area.endPosition.x}, ${area.endPosition.y})`;
         if (area.startPosition.z > 0) {
             areaDef += `.setPlane(${area.startPosition.z})`;
         }
@@ -69,17 +51,17 @@ export class OSBotAreasConverter extends OSBotConverter {
     
     toJavaArray(areas) {
         if (areas.areas.length === 1) {
-            return ` ` + this.toJavaSingle(areas.areas[0]) + `;`;
+            return `${this.javaArea} area = ` + this.toJavaSingle(areas.areas[0]) + `;`;
         } else if (areas.areas.length > 1) {
-            var output = `AreaName(\n`;
+            var output = `${this.javaArea}[] area = {\n`;
             for (var i = 0; i < areas.areas.length; i++) {
-                output += "    " + this.toJavaSingle1(areas.areas[i]);
+                output += "    " + this.toJavaSingle(areas.areas[i]);
                 if (i !== areas.areas.length - 1) {
                     output += ",";
                 }
                 output += "\n";
             }
-            output += "),";
+            output += "};";
             return output;
         }
         return "";
@@ -87,7 +69,7 @@ export class OSBotAreasConverter extends OSBotConverter {
     
     toJavaList(areas) {
         if (areas.areas.length === 1) {
-            return ` ` + this.toJavaSingle(areas.areas[0]) + ";";
+            return `${this.javaArea} area = ` + this.toJavaSingle(areas.areas[0]) + ";";
         } else if (areas.areas.length > 1) {
             var output = `List&lt;${this.javaArea}&gt; area = new ArrayList<>();\n`;
             for (var i = 0; i < areas.areas.length; i++) {
@@ -100,10 +82,10 @@ export class OSBotAreasConverter extends OSBotConverter {
     
     toJavaArraysAsList(areas) {
         if (areas.areas.length === 1) {
-            return ` ` + this.toJavaSingle(areas.areas[0]) + ";";
+            return `${this.javaArea} area = ` + this.toJavaSingle(areas.areas[0]) + ";";
         } else if (areas.areas.length > 1) {
             var output = `List&lt;${this.javaArea}&gt; area = Arrays.asList(\n` +
-                `    AreaName[]{\n`;
+                `    new ${this.javaArea}[]{\n`;
             
             for (var i = 0; i < areas.areas.length; i++) {
                 output += "        " + this.toJavaSingle(areas.areas[i]);

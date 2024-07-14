@@ -9,10 +9,10 @@ export class RuneLiteAreasConverter extends OSBotAreasConverter {
     
     constructor() {
         super();
-        this.javaArea = "AABB";
-        this.javaPosition = "AABB";
+        this.javaArea = "WorldArea";
+        this.javaPosition = "WorldPoint";
     }
-
+    
     fromJava(text, areas) {
         areas.removeAll();
         text = text.replace(/\s/g, '');
@@ -37,17 +37,17 @@ export class RuneLiteAreasConverter extends OSBotAreasConverter {
 
                 var pos2Values = match[3].split(",");
                 var pos2Z = match[4] !== undefined ? match[4] : pos2Values[2];
-
+                
                 areas.add(new Area(new Position(pos1Values[0], pos1Values[1], pos1Z), new Position(pos2Values[0], pos2Values[1], pos2Z)));
             }
         }
     }
-
+    
     toJavaSingle(area) {
         var start = area.startPosition.x < area.endPosition.x ? area.startPosition.x : area.endPosition.x;
         var end = area.startPosition.y < area.endPosition.y ? area.startPosition.y : area.endPosition.y;
 
 
-        return `AreaName(${start}, ${end}, ${Math.abs(area.startPosition.x - area.endPosition.x) + 1}, ${Math.abs(area.startPosition.y - area.endPosition.y) + 1}, ${area.endPosition.z})`;
+        return `new ${this.javaArea}(${start}, ${end}, ${Math.abs(area.startPosition.x - area.endPosition.x) + 1}, ${Math.abs(area.startPosition.y - area.endPosition.y) + 1}, ${area.endPosition.z})`;
     }
 }

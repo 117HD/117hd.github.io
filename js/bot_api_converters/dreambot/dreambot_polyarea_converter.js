@@ -8,7 +8,7 @@ export class DreamBotPolyAreaConverter extends OSBotPolyAreaConverter {
 
     constructor() {
         super();
-        this.javaArea = "AABB";
+        this.javaArea = "Area";
         this.javaPosition = "Tile";
     }
     
@@ -40,7 +40,7 @@ export class DreamBotPolyAreaConverter extends OSBotPolyAreaConverter {
         if (polyarea.positions.length == 0) {
             return "";
         }
-        var output = `AreaName((\n    new ${this.javaPosition}[] {`;
+        var output = `${this.javaArea} area = new ${this.javaArea}(\n    new ${this.javaPosition}[] {`;
         for (var i = 0; i < polyarea.positions.length; i++) {
             var position = polyarea.positions[i];
             output += `\n        new ${this.javaPosition}(${position.x}, ${position.y}, ${position.z})`;

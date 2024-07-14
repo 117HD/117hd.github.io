@@ -9,7 +9,7 @@ export class RSPeerAreasConverter extends OSBotAreasConverter {
     
     constructor() {
         super();
-        this.javaArea = "AABB";
+        this.javaArea = "Area";
         this.javaPosition = "Position";
     }
     
